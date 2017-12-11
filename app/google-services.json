@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1004224777788",
+    "firebase_url": "https://movapp-d1ada.firebaseio.com",
+    "project_id": "movapp-d1ada",
+    "storage_bucket": "movapp-d1ada.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004224777788:android:dc1dab9d44adacf5",
+        "android_client_info": {
+          "package_name": "com.inc.silence.movapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004224777788-raqpdb8ifaejoojb0o2h3fa01a1vn7ek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaAzMoES2ntzS_IQwqsShLGsp0mH_lt18"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
