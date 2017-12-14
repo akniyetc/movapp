@@ -2,6 +2,7 @@ package com.inc.silence.movapp.domain.entity.detail;
 
 import com.google.gson.annotations.SerializedName;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Seasons extends RealmObject {
     public static final String EPISODE_COUNT = "episode_count";
@@ -10,15 +11,18 @@ public class Seasons extends RealmObject {
     public static final String SEASON_NUMBER = "season_number";
     public static final String AIR_DATE = "air_date";
 
-    @SerializedName("episode_count")
+    @SerializedName(EPISODE_COUNT)
     private int episode_count;
-    @SerializedName("id")
+
+    @PrimaryKey
+    @SerializedName(ID)
     private int id;
-    @SerializedName("poster_path")
+
+    @SerializedName(POSTER_PATH)
     private String poster_path;
-    @SerializedName("season_number")
+    @SerializedName(SEASON_NUMBER)
     private int season_number;
-    @SerializedName("air_date")
+    @SerializedName(AIR_DATE)
     private String air_date;
 
     public Seasons(){ }

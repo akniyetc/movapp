@@ -3,6 +3,7 @@ package com.inc.silence.movapp.domain.entity.movies;
 import com.google.gson.annotations.SerializedName;
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Results extends RealmObject {
     public static final String ORIGINAL_NAME = "original_name";
@@ -19,31 +20,34 @@ public class Results extends RealmObject {
     public static final String OVERVIEW = "overview";
     public static final String POSTER_PATH = "poster_path";
 
-    @SerializedName("original_name")
+    @SerializedName(ORIGINAL_NAME)
     private String original_name;
-    @SerializedName("genre_ids")
+    @SerializedName(GENRE_IDS)
     private RealmList<Genre_ids> genre_ids;
-    @SerializedName("name")
+    @SerializedName(NAME)
     private String name;
-    @SerializedName("popularity")
+    @SerializedName(POPULARITY)
     private float popularity;
-    @SerializedName("origin_country")
+    @SerializedName(ORIGIN_COUNTRY)
     private RealmList<OrigincountryList> origin_country;
-    @SerializedName("vote_count")
+    @SerializedName(VOTE_COUNT)
     private int vote_count;
-    @SerializedName("first_air_date")
+    @SerializedName(FIRST_AIR_DATE)
     private String first_air_date;
-    @SerializedName("backdrop_path")
+    @SerializedName(BACKDROP_PATH)
     private String backdrop_path;
-    @SerializedName("original_language")
+    @SerializedName(ORIGINAL_LANGUAGE)
     private String original_language;
-    @SerializedName("id")
+
+    @PrimaryKey
+    @SerializedName(ID)
     private int id;
-    @SerializedName("vote_average")
+
+    @SerializedName(VOTE_AVERAGE)
     private float vote_average;
-    @SerializedName("overview")
+    @SerializedName(OVERVIEW)
     private String overview;
-    @SerializedName("poster_path")
+    @SerializedName(POSTER_PATH)
     private String poster_path;
 
     public Results(){ }

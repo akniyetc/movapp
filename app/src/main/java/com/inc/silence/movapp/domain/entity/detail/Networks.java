@@ -2,14 +2,16 @@ package com.inc.silence.movapp.domain.entity.detail;
 
 import com.google.gson.annotations.SerializedName;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Networks extends RealmObject {
     public static final String ID = "id";
     public static final String NAME = "name";
 
-    @SerializedName("id")
+    @PrimaryKey
+    @SerializedName(ID)
     private int id;
-    @SerializedName("name")
+    @SerializedName(NAME)
     private String name;
 
     public Networks(){ }

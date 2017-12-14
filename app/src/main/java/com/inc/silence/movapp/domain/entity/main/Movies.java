@@ -1,25 +1,42 @@
-package com.inc.silence.movapp.domain.entity.movies;
+package com.inc.silence.movapp.domain.entity.main;
 
 import com.google.gson.annotations.SerializedName;
+import com.inc.silence.movapp.domain.entity.movies.Results;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Movies extends RealmObject {
     public static final String PAGE = "page";
+    public static final String ID = "id";
     public static final String TOTAL_RESULTS = "total_results";
     public static final String TOTAL_PAGES = "total_pages";
     public static final String RESULTS = "results";
 
-    @SerializedName("page")
+    @PrimaryKey
+    @SerializedName(ID)
+    private String id;
+
+    @SerializedName(PAGE)
     private int page;
-    @SerializedName("total_results")
+    @SerializedName(TOTAL_RESULTS)
     private int total_results;
-    @SerializedName("total_pages")
+    @SerializedName(TOTAL_PAGES)
     private int total_pages;
-    @SerializedName("results")
+    @SerializedName(RESULTS)
     private RealmList<Results> results;
 
     public Movies(){ }
+
+    public String getId() {
+        return id;
+    }
+
+    public Movies setId(String id) {
+        this.id = id;
+        return this;
+    }
 
     public Movies setPage(int page){
         this.page = page;

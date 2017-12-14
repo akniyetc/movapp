@@ -1,8 +1,18 @@
-package com.inc.silence.movapp.domain.entity.detail;
+package com.inc.silence.movapp.domain.entity.main;
 
 import com.google.gson.annotations.SerializedName;
+import com.inc.silence.movapp.domain.entity.detail.Created_by;
+import com.inc.silence.movapp.domain.entity.detail.Episode_run_time;
+import com.inc.silence.movapp.domain.entity.detail.Genres;
+import com.inc.silence.movapp.domain.entity.detail.Languages;
+import com.inc.silence.movapp.domain.entity.detail.Networks;
+import com.inc.silence.movapp.domain.entity.detail.Origin_country;
+import com.inc.silence.movapp.domain.entity.detail.Production_companies;
+import com.inc.silence.movapp.domain.entity.detail.Seasons;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class MovieDetail extends RealmObject {
     public static final String BACKDROP_PATH = "backdrop_path";
@@ -32,57 +42,60 @@ public class MovieDetail extends RealmObject {
     public static final String VOTE_AVERAGE = "vote_average";
     public static final String VOTE_COUNT = "vote_count";
 
-    @SerializedName("backdrop_path")
+    @SerializedName(BACKDROP_PATH)
     private String backdrop_path;
-    @SerializedName("created_by")
+    @SerializedName(CREATED_BY)
     private RealmList<Created_by> created_by;
-    @SerializedName("episode_run_time")
+    @SerializedName(EPISODE_RUN_TIME)
     private RealmList<Episode_run_time> episode_run_time;
-    @SerializedName("first_air_date")
+    @SerializedName(FIRST_AIR_DATE)
     private String first_air_date;
-    @SerializedName("genres")
+    @SerializedName(GENRES)
     private RealmList<Genres> genres;
-    @SerializedName("homepage")
+    @SerializedName(HOMEPAGE)
     private String homepage;
-    @SerializedName("id")
+
+    @PrimaryKey
+    @SerializedName(ID)
     private int id;
-    @SerializedName("in_production")
+
+    @SerializedName(IN_PRODUCTION)
     private boolean in_production;
-    @SerializedName("languages")
+    @SerializedName(LANGUAGES)
     private RealmList<Languages> languages;
-    @SerializedName("last_air_date")
+    @SerializedName(LAST_AIR_DATE)
     private String last_air_date;
-    @SerializedName("name")
+    @SerializedName(NAME)
     private String name;
-    @SerializedName("networks")
+    @SerializedName(NETWORKS)
     private RealmList<Networks> networks;
-    @SerializedName("number_of_episodes")
+    @SerializedName(NUMBER_OF_EPISODES)
     private int number_of_episodes;
-    @SerializedName("number_of_seasons")
+    @SerializedName(NUMBER_OF_SEASONS)
     private int number_of_seasons;
-    @SerializedName("origin_country")
+    @SerializedName(ORIGIN_COUNTRY)
     private RealmList<Origin_country> origin_country;
-    @SerializedName("original_language")
+    @SerializedName(ORIGINAL_LANGUAGE)
     private String original_language;
-    @SerializedName("original_name")
+    @SerializedName(ORIGINAL_NAME)
     private String original_name;
-    @SerializedName("overview")
+    @SerializedName(OVERVIEW)
     private String overview;
-    @SerializedName("popularity")
+    @SerializedName(POPULARITY)
     private float popularity;
-    @SerializedName("poster_path")
+    @SerializedName(POSTER_PATH)
     private String poster_path;
-    @SerializedName("production_companies")
+    @SerializedName(PRODUCTION_COMPANIES)
     private RealmList<Production_companies> production_companies;
-    @SerializedName("seasons")
+    @SerializedName(SEASONS)
     private RealmList<Seasons> seasons;
-    @SerializedName("status")
+    @SerializedName(STATUS)
     private String status;
-    @SerializedName("type")
+    @SerializedName(TYPE)
     private String type;
-    @SerializedName("vote_average")
+    @SerializedName(VOTE_AVERAGE)
     private float vote_average;
-    @SerializedName("vote_count")
+    @SerializedName(VOTE_COUNT)
     private int vote_count;
 
     public MovieDetail(){ }

@@ -2,17 +2,20 @@ package com.inc.silence.movapp.domain.entity.detail;
 
 import com.google.gson.annotations.SerializedName;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Created_by extends RealmObject {
     public static final String ID = "id";
     public static final String NAME = "name";
     public static final String PROFILE_PATH = "profile_path";
 
-    @SerializedName("id")
+    @PrimaryKey
+    @SerializedName(ID)
     private int id;
-    @SerializedName("name")
+
+    @SerializedName(NAME)
     private String name;
-    @SerializedName("profile_path")
+    @SerializedName(PROFILE_PATH)
     private String profile_path;
 
     public Created_by(){ }
