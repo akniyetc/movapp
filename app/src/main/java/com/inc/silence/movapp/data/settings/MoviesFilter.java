@@ -2,6 +2,7 @@ package com.inc.silence.movapp.data.settings;
 
 import com.f2prateek.rx.preferences2.Preference;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
+import com.inc.silence.movapp.utils.Constants;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,33 +17,13 @@ public class MoviesFilter {
     public static final String LANGUAGE = "language";
     public static final String PAGE = "page";
 
-    private Preference<String> apiKey;
-    private Preference<String> language;
     private Preference<Integer> page;
 
     private boolean cached;
     private boolean loadMore;
 
     public MoviesFilter(RxSharedPreferences preferences) {
-        apiKey = preferences.getString(API_KEY, "");
-        language = preferences.getString(LANGUAGE, "");
         page = preferences.getInteger(PAGE, 0);
-    }
-
-    public String getApiKey() {
-        return apiKey.get();
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey.set(apiKey);
-    }
-
-    public String getLanguage() {
-        return language.get();
-    }
-
-    public void setLanguage(String language) {
-        this.language.set(language);
     }
 
     public int getPage() {
@@ -69,15 +50,18 @@ public class MoviesFilter {
         this.loadMore = loadMore;
     }
 
-    public Map<String, String> getQueries() {
+    public Map<String, String> getQueriesMovies() {
         Map<String, String> queries = new HashMap<>();
-        if (apiKey.isSet() && !apiKey.get().isEmpty()) {
-            queries.put("api_key", apiKey.get());
-        }
-        if (language.isSet() && !language.get().isEmpty()) {
-            queries.put("language", language.get());
-        }
-        queries.put("page", page.get().toString());
+        queries.put(API_KEY, Constants.API_KEY);
+        queries.put(LANGUAGE, Constants.LANGUAGE);
+        queries.put(PAGE, page.get().toString());
+        return queries;
+    }
+
+    public Map<String, String> getQueriesMovieDetail() {
+        Map<String, String> queries = new HashMap<>();
+        queries.put(API_KEY, Constants.API_KEY);
+        queries.put(LANGUAGE, Constants.LANGUAGE);
         return queries;
     }
 }

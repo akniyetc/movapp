@@ -1,7 +1,7 @@
 package com.inc.silence.movapp.domain.entity.main;
 
 import com.google.gson.annotations.SerializedName;
-import com.inc.silence.movapp.domain.entity.movies.Results;
+import com.inc.silence.movapp.domain.entity.movies.Movie;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -25,7 +25,7 @@ public class Movies extends RealmObject {
     @SerializedName(TOTAL_PAGES)
     private int total_pages;
     @SerializedName(RESULTS)
-    private RealmList<Results> results;
+    private RealmList<Movie> results;
 
     public Movies(){ }
 
@@ -59,11 +59,11 @@ public class Movies extends RealmObject {
     public int getTotal_pages(){
         return this.total_pages;
     }
-    public Movies setResults(RealmList<Results> results){
+    public Movies setResults(RealmList<Movie> results){
         this.results = results;
         return this;
     }
-    public RealmList<Results> getResults(){
+    public RealmList<Movie> getResults(){
         return this.results;
     }
 }

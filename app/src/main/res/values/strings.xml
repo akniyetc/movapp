@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MovApp</string>
+    <string name="movies_count" formatted="false">Movies count: %d</string>
+    <string name="no_data_error">No data</string>
 </resources>

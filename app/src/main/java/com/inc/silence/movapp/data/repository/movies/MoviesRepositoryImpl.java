@@ -1,7 +1,6 @@
 package com.inc.silence.movapp.data.repository.movies;
 
 import com.inc.silence.movapp.data.exception.ExceptionFactory;
-import com.inc.silence.movapp.data.settings.MovieQuery;
 import com.inc.silence.movapp.data.settings.MoviesFilter;
 import com.inc.silence.movapp.di.scopes.ApplicationScope;
 import com.inc.silence.movapp.domain.entity.main.MovieDetail;
@@ -25,7 +24,6 @@ public class MoviesRepositoryImpl implements MoviesRepository {
     private MoviesCloudStorage mMoviesCloudStorage;
     private MoviesLocalStorage mMoviesLocalStorage;
     private MoviesFilter mMoviesFilter;
-    private MovieQuery mMovieQuery;
 
     @Inject
     public MoviesRepositoryImpl(MoviesCloudStorage moviesCloudStorage, MoviesLocalStorage moviesLocalStorage) {
@@ -39,7 +37,7 @@ public class MoviesRepositoryImpl implements MoviesRepository {
         return Observable.create((ObservableOnSubscribe<Movies>) e -> {
             if (mMoviesFilter.isCached()) {
                 mMoviesLocalStorage
-                        .getPopular(mMoviesFilter.getQueries(), id)
+                        .getPopular(mMoviesFilter.getQueriesMovies(), id)
                         .subscribe(movies -> {
                             if (!e.isDisposed()) {
                                 e.onNext(movies);
@@ -51,7 +49,7 @@ public class MoviesRepositoryImpl implements MoviesRepository {
                         });
             } else {
                 mMoviesCloudStorage
-                        .getPopular(mMoviesFilter.getQueries(), id)
+                        .getPopular(mMoviesFilter.getQueriesMovies(), id)
                         .doOnNext(movies -> mMoviesLocalStorage.savePopularMovies(movies, !mMoviesFilter.isLoadMore()))
                         .subscribe(movies -> {
                             if (!e.isDisposed()) {
@@ -71,7 +69,7 @@ public class MoviesRepositoryImpl implements MoviesRepository {
 
     private void getPopularMoviesFromLocalStore(ObservableEmitter<Movies> e, Throwable t, String id) {
         mMoviesLocalStorage
-                .getPopular(mMoviesFilter.getQueries(), id)
+                .getPopular(mMoviesFilter.getQueriesMovies(), id)
                 .subscribe(movies -> {
                     if (!e.isDisposed()) {
                         if (!mMoviesFilter.isLoadMore()) {
@@ -92,7 +90,7 @@ public class MoviesRepositoryImpl implements MoviesRepository {
         return Observable.create((ObservableOnSubscribe<Movies>) e -> {
             if (mMoviesFilter.isCached()) {
                 mMoviesLocalStorage
-                        .getTopRated(mMoviesFilter.getQueries(), id)
+                        .getTopRated(mMoviesFilter.getQueriesMovies(), id)
                         .subscribe(movies -> {
                             if (!e.isDisposed()) {
                                 e.onNext(movies);
@@ -104,8 +102,8 @@ public class MoviesRepositoryImpl implements MoviesRepository {
                         });
             } else {
                 mMoviesCloudStorage
-                        .getTopRated(mMoviesFilter.getQueries(), id)
-                        .doOnNext(movies -> mMoviesLocalStorage.savePopularMovies(movies, !mMoviesFilter.isLoadMore()))
+                        .getTopRated(mMoviesFilter.getQueriesMovies(), id)
+                        .doOnNext(movies -> mMoviesLocalStorage.saveTopRated(movies, !mMoviesFilter.isLoadMore()))
                         .subscribe(movies -> {
                             if (!e.isDisposed()) {
                                 mMoviesFilter.setPage(movies.getPage() + 1);
@@ -124,7 +122,7 @@ public class MoviesRepositoryImpl implements MoviesRepository {
 
     private void getTopRatedMoviesFromLocalStore(ObservableEmitter<Movies> e, Throwable t, String id) {
         mMoviesLocalStorage
-                .getTopRated(mMoviesFilter.getQueries(), id)
+                .getTopRated(mMoviesFilter.getQueriesMovies(), id)
                 .subscribe(movies -> {
                     if (!e.isDisposed()) {
                         if (!mMoviesFilter.isLoadMore()) {
@@ -140,10 +138,10 @@ public class MoviesRepositoryImpl implements MoviesRepository {
     }
 
     @Override
-    public Observable<MovieDetail> getMovieDetail(String id, MovieQuery query) {
-        mMovieQuery = query;
+    public Observable<MovieDetail> getMovieDetail(String id, MoviesFilter moviesFilter) {
+        mMoviesFilter = moviesFilter;
         return Observable.create((ObservableOnSubscribe<MovieDetail>) e -> mMoviesCloudStorage
-                .getDetailMovie(id, mMovieQuery.getQueries())
+                .getDetailMovie(id, mMoviesFilter.getQueriesMovieDetail())
                 .doOnNext(movieDetail -> mMoviesLocalStorage.saveMovieDetail(movieDetail))
                 .subscribe(movieFull -> {
                     if (!e.isDisposed()) {
@@ -160,7 +158,7 @@ public class MoviesRepositoryImpl implements MoviesRepository {
 
     private void getMovieDetailFromLocalStore(ObservableEmitter<MovieDetail> e, Throwable t, String id) {
         mMoviesLocalStorage
-                .getDetailMovie(id, mMovieQuery.getQueries())
+                .getDetailMovie(id, mMoviesFilter.getQueriesMovieDetail())
                 .subscribe(movieDetail -> {
                     if (!e.isDisposed()) {
                         e.onNext(movieDetail);

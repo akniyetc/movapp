@@ -5,7 +5,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Results extends RealmObject {
+public class Movie extends RealmObject {
     public static final String ORIGINAL_NAME = "original_name";
     public static final String GENRE_IDS = "genre_ids";
     public static final String NAME = "name";
@@ -50,93 +50,93 @@ public class Results extends RealmObject {
     @SerializedName(POSTER_PATH)
     private String poster_path;
 
-    public Results(){ }
+    public Movie(){ }
 
-    public Results setOriginal_name(String original_name){
+    public Movie setOriginal_name(String original_name){
         this.original_name = original_name;
         return this;
     }
     public String getOriginal_name(){
         return this.original_name;
     }
-    public Results setGenre_ids(RealmList<Genre_ids> genre_ids){
+    public Movie setGenre_ids(RealmList<Genre_ids> genre_ids){
         this.genre_ids = genre_ids;
         return this;
     }
     public RealmList<Genre_ids> getGenre_ids(){
         return this.genre_ids;
     }
-    public Results setName(String name){
+    public Movie setName(String name){
         this.name = name;
         return this;
     }
     public String getName(){
         return this.name;
     }
-    public Results setPopularity(float popularity){
+    public Movie setPopularity(float popularity){
         this.popularity = popularity;
         return this;
     }
     public float getPopularity(){
         return this.popularity;
     }
-    public Results setOrigin_country(RealmList<OrigincountryList> origin_country){
+    public Movie setOrigin_country(RealmList<OrigincountryList> origin_country){
         this.origin_country = origin_country;
         return this;
     }
     public RealmList<OrigincountryList> getOrigin_country(){
         return this.origin_country;
     }
-    public Results setVote_count(int vote_count){
+    public Movie setVote_count(int vote_count){
         this.vote_count = vote_count;
         return this;
     }
     public int getVote_count(){
         return this.vote_count;
     }
-    public Results setFirst_air_date(String first_air_date){
+    public Movie setFirst_air_date(String first_air_date){
         this.first_air_date = first_air_date;
         return this;
     }
     public String getFirst_air_date(){
         return this.first_air_date;
     }
-    public Results setBackdrop_path(String backdrop_path){
+    public Movie setBackdrop_path(String backdrop_path){
         this.backdrop_path = backdrop_path;
         return this;
     }
     public String getBackdrop_path(){
         return this.backdrop_path;
     }
-    public Results setOriginal_language(String original_language){
+    public Movie setOriginal_language(String original_language){
         this.original_language = original_language;
         return this;
     }
     public String getOriginal_language(){
         return this.original_language;
     }
-    public Results setId(int id){
+    public Movie setId(int id){
         this.id = id;
         return this;
     }
     public int getId(){
         return this.id;
     }
-    public Results setVote_average(float vote_average){
+    public Movie setVote_average(float vote_average){
         this.vote_average = vote_average;
         return this;
     }
     public float getVote_average(){
         return this.vote_average;
     }
-    public Results setOverview(String overview){
+    public Movie setOverview(String overview){
         this.overview = overview;
         return this;
     }
     public String getOverview(){
         return this.overview;
     }
-    public Results setPoster_path(String poster_path){
+    public Movie setPoster_path(String poster_path){
         this.poster_path = poster_path;
         return this;
     }
