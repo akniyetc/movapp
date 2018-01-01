@@ -2,4 +2,11 @@
     <string name="app_name">MovApp</string>
     <string name="movies_count" formatted="false">Movies count: %d</string>
     <string name="no_data_error">No data</string>
+    <string name="no_connection_exception_error">No connection to the server</string>
+    <string name="default_exception_error">Error retrieving data</string>
+    <string name="json_parse_exception_error">Parsing error json</string>
+    <string name="timeout_error_exception_error">Timeout expired</string>
+    <string name="not_found_exception_error">Object not found</string>
+    <string name="try_again_snack_bar">Try again</string>
+    <string name="transition">sharedElement</string>
 </resources>

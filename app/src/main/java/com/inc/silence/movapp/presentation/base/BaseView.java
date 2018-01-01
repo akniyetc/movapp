@@ -3,6 +3,8 @@ package com.inc.silence.movapp.presentation.base;
 import android.content.Context;
 
 import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 /**
  * Created by silence on 29.12.2017.
@@ -10,7 +12,7 @@ import com.arellomobile.mvp.MvpView;
 
 public interface BaseView extends MvpView{
 
-    Context getContext();
+    //Context getContext();
 
     void showLoadingProgress();
 

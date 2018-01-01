@@ -1,11 +1,12 @@
-package com.inc.silence.movapp.ui.splash;
+package com.inc.silence.movapp.ui.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.inc.silence.movapp.R;
+import com.inc.silence.movapp.ui.base.BaseActivity;
 
-public class SplashActivity extends AppCompatActivity {
+public class MoviesActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

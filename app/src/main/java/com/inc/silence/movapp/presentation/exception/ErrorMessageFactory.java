@@ -2,10 +2,10 @@ package com.inc.silence.movapp.presentation.exception;
 
 import android.content.Context;
 
-import com.example.silence.movapp.data.exception.JsonParseException;
-import com.example.silence.movapp.data.exception.TimeoutException;
-import com.example.silence.movapp.R;
-import com.example.silence.movapp.data.exception.NetworkConnectionException;
+import com.inc.silence.movapp.data.exception.JsonParseException;
+import com.inc.silence.movapp.data.exception.TimeoutException;
+import com.inc.silence.movapp.R;
+import com.inc.silence.movapp.data.exception.NetworkConnectionException;
 
 
 public class ErrorMessageFactory {

@@ -1,5 +1,7 @@
 package com.inc.silence.movapp.presentation.movies.popularMovies;
 
+import android.content.Context;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.inc.silence.movapp.R;
 import com.inc.silence.movapp.data.settings.MoviesFilter;
@@ -21,6 +23,9 @@ import javax.inject.Inject;
 @InjectViewState
 public class PopularMoviesPresenter extends BasePresenter<PopularMoviesView> {
 
+    @Inject
+    Context mContext;
+
     private PopularMoviesInteractor mPopularMoviesInteractor;
     private MoviesFilter mMoviesFilter;
     private List<Movie> mMoviesList;
@@ -40,7 +45,7 @@ public class PopularMoviesPresenter extends BasePresenter<PopularMoviesView> {
         getPopularMoviesList();
     }
 
-    private void loadMore() {
+    public void loadMore() {
         if (mAllItemsCount > mMoviesList.size()) {
             mMoviesFilter.setLoadMore(true);
             mMoviesFilter.setCached(false);
@@ -54,9 +59,9 @@ public class PopularMoviesPresenter extends BasePresenter<PopularMoviesView> {
                 PopularMoviesInteractor.Params.create(mMoviesFilter, "1"));
     }
 
-    private void showErrorMessage(Throwable throwable) {
+    public void showErrorMessage(Throwable throwable) {
         getViewState().hideLoadingProgress();
-        getViewState().showErrorMessage(ErrorMessageFactory.create(getViewState().getContext(), throwable));
+        getViewState().showErrorMessage(ErrorMessageFactory.create(mContext, throwable));
     }
 
     @Override
@@ -79,7 +84,7 @@ public class PopularMoviesPresenter extends BasePresenter<PopularMoviesView> {
             }
             mAllItemsCount = movies.getTotal_pages();
             //mMoviesFilter.setPage(mMoviesList.size() / movies.getPage());
-            getViewState().setSubtitle(String.format(getViewState().getContext().getString(R.string.movies_count), movies.getTotal_results()));
+            getViewState().setSubtitle(String.format(mContext.getString(R.string.movies_count), movies.getTotal_results()));
             getViewState().getPopularMoviesDone(mMoviesList);
             getViewState().hideLoadingProgress();
         }
