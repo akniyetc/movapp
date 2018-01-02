@@ -10,9 +10,9 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
  * Created by silence on 29.12.2017.
  */
 
-public interface BaseView extends MvpView{
+public interface BaseView {
 
-    //Context getContext();
+    Context getContext();
 
     void showLoadingProgress();
 

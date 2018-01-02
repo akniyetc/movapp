@@ -1,8 +1,10 @@
 package com.inc.silence.movapp.di.components;
 
 
+import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.di.modules.AppModule;
 import com.inc.silence.movapp.di.scopes.ApplicationScope;
+import com.inc.silence.movapp.presentation.movies.popularMovies.PopularMoviesPresenter;
 import com.inc.silence.movapp.ui.detail.MovieDetailActivity;
 import com.inc.silence.movapp.ui.detail.MovieDetailFragment;
 import com.inc.silence.movapp.ui.main.MoviesActivity;
@@ -30,4 +32,5 @@ public interface AppComponent {
     void inject(MovieDetailActivity movieDetailActivity);
 
     void inject(MovieDetailFragment movieDetailFragment);
+
 }

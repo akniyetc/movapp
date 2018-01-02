@@ -41,7 +41,7 @@ public class Movie extends RealmObject {
 
     @PrimaryKey
     @SerializedName(ID)
-    private int id;
+    private String id;
 
     @SerializedName(VOTE_AVERAGE)
     private float vote_average;
@@ -115,11 +115,11 @@ public class Movie extends RealmObject {
     public String getOriginal_language(){
         return this.original_language;
     }
-    public Movie setId(int id){
+    public Movie setId(String id){
         this.id = id;
         return this;
     }
-    public int getId(){
+    public String getId(){
         return this.id;
     }
     public Movie setVote_average(float vote_average){

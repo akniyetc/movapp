@@ -26,6 +26,7 @@ public class BaseActivity extends MvpAppCompatActivity {
 
     private Unbinder mUnbinder;
 
+
     protected void setCustomContentView(@LayoutRes int resId) {
         ViewGroup container = findViewById(android.R.id.content);
         getLayoutInflater().inflate(resId, container);

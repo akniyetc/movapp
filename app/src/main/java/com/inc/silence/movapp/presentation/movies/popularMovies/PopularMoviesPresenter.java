@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.inc.silence.movapp.R;
+import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.data.settings.MoviesFilter;
 import com.inc.silence.movapp.domain.entity.main.Movies;
 import com.inc.silence.movapp.domain.entity.movies.Movie;
@@ -20,78 +21,10 @@ import javax.inject.Inject;
 /**
  * Created by silence on 30.12.2017.
  */
-@InjectViewState
-public class PopularMoviesPresenter extends BasePresenter<PopularMoviesView> {
 
-    @Inject
-    Context mContext;
+public abstract class PopularMoviesPresenter extends BasePresenter<PopularMoviesView> {
 
-    private PopularMoviesInteractor mPopularMoviesInteractor;
-    private MoviesFilter mMoviesFilter;
-    private List<Movie> mMoviesList;
-    private int mAllItemsCount;
+    public abstract void getPopularMovies (boolean cached);
 
-    @Inject
-    public PopularMoviesPresenter(PopularMoviesInteractor popularMoviesInteractor, MoviesFilter moviesFilter) {
-        mPopularMoviesInteractor = popularMoviesInteractor;
-        mMoviesFilter = moviesFilter;
-        mMoviesList = new ArrayList<>();
-    }
-
-    public void getPopularMovies(boolean cached) {
-        mMoviesFilter.setCached(cached);
-        mMoviesFilter.setPage(0);
-        mMoviesFilter.setLoadMore(false);
-        getPopularMoviesList();
-    }
-
-    public void loadMore() {
-        if (mAllItemsCount > mMoviesList.size()) {
-            mMoviesFilter.setLoadMore(true);
-            mMoviesFilter.setCached(false);
-            getPopularMoviesList();
-        }
-    }
-
-    private void getPopularMoviesList() {
-        getViewState().showLoadingProgress();
-        mPopularMoviesInteractor.execute(new PopularMoviesListObserver(),
-                PopularMoviesInteractor.Params.create(mMoviesFilter, "1"));
-    }
-
-    public void showErrorMessage(Throwable throwable) {
-        getViewState().hideLoadingProgress();
-        getViewState().showErrorMessage(ErrorMessageFactory.create(mContext, throwable));
-    }
-
-    @Override
-    public void detachView(PopularMoviesView view) {
-        super.detachView(view);
-        if (mPopularMoviesInteractor != null) {
-            mPopularMoviesInteractor.dispose();
-        }
-    }
-
-    private final class PopularMoviesListObserver extends InteractorObserver<Movies> {
-
-        @Override
-        public void onNext(Movies movies) {
-            super.onNext(movies);
-            if (mMoviesFilter.isLoadMore()) {
-                mMoviesList.addAll(movies.getResults());
-            } else {
-                mMoviesList = movies.getResults();
-            }
-            mAllItemsCount = movies.getTotal_pages();
-            //mMoviesFilter.setPage(mMoviesList.size() / movies.getPage());
-            getViewState().setSubtitle(String.format(mContext.getString(R.string.movies_count), movies.getTotal_results()));
-            getViewState().getPopularMoviesDone(mMoviesList);
-            getViewState().hideLoadingProgress();
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            showErrorMessage(e);
-        }
-    }
+    public abstract void loadMore();
 }

@@ -23,14 +23,12 @@ public class DataModule {
 
     @Provides
     @ApplicationScope
-    @PrefFile
     SharedPreferences provideSharedPreferences(Application app) {
         return app.getSharedPreferences(Constants.KEY_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     @Provides
     @ApplicationScope
-    @PrefFile
     RxSharedPreferences provideRxSharedPreferences(SharedPreferences sharedPreferences) {
         return RxSharedPreferences.create(sharedPreferences);
     }
