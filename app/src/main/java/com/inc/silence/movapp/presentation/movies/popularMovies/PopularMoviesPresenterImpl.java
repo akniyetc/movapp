@@ -34,7 +34,7 @@ public class PopularMoviesPresenterImpl extends PopularMoviesPresenter {
     @Override
     public void getPopularMovies(boolean cached) {
         mMoviesFilter.setCached(cached);
-        mMoviesFilter.setPage(0);
+        mMoviesFilter.setPage(1);
         mMoviesFilter.setLoadMore(false);
         getPopularMoviesList();
     }

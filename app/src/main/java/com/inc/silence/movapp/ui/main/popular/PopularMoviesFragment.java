@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.inc.silence.movapp.R;
 import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.data.settings.MoviesFilter;
@@ -25,7 +24,6 @@ import com.inc.silence.movapp.ui.base.BaseFragment;
 import com.inc.silence.movapp.ui.main.MoviesActivity;
 import com.inc.silence.movapp.ui.main.MoviesListAdapter;
 import com.inc.silence.movapp.utils.RecyclerViewListener;
-import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.List;
 

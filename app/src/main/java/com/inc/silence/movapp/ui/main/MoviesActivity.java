@@ -3,12 +3,10 @@ package com.inc.silence.movapp.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 
 import com.inc.silence.movapp.R;
 import com.inc.silence.movapp.app.App;
-import com.inc.silence.movapp.domain.entity.main.MovieDetail;
 import com.inc.silence.movapp.ui.base.BaseActivity;
 import com.inc.silence.movapp.ui.detail.MovieDetailActivity;
 import com.inc.silence.movapp.ui.detail.MovieDetailFragment;

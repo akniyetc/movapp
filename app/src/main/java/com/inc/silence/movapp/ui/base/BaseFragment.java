@@ -2,9 +2,9 @@ package com.inc.silence.movapp.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.di.components.AppComponent;
@@ -16,7 +16,7 @@ import butterknife.Unbinder;
  * Created by silence on 30.12.2017.
  */
 
-public abstract class BaseFragment extends MvpAppCompatFragment {
+public abstract class BaseFragment extends Fragment {
 
     private Unbinder mUnbinder;
 

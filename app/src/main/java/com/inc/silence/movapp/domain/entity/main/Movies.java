@@ -14,9 +14,7 @@ public class Movies extends RealmObject {
     public static final String TOTAL_PAGES = "total_pages";
     public static final String RESULTS = "results";
 
-    @PrimaryKey
-    @SerializedName(ID)
-    private String id;
+
 
     @SerializedName(PAGE)
     private int page;
@@ -26,6 +24,10 @@ public class Movies extends RealmObject {
     private int total_pages;
     @SerializedName(RESULTS)
     private RealmList<Movie> results;
+
+    @PrimaryKey
+    @SerializedName(ID)
+    private String id;
 
     public Movies(){ }
 

@@ -1,7 +1,5 @@
 package com.inc.silence.movapp.presentation.movies.movieDetail;
 
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.inc.silence.movapp.domain.entity.main.MovieDetail;
 import com.inc.silence.movapp.presentation.base.BaseView;
 

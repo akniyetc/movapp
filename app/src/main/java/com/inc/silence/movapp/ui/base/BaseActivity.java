@@ -4,11 +4,11 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.inc.silence.movapp.R;
 
 import butterknife.BindView;
@@ -19,7 +19,7 @@ import butterknife.Unbinder;
  * Created by silence on 30.12.2017.
  */
 
-public class BaseActivity extends MvpAppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     protected Toolbar mToolbar;

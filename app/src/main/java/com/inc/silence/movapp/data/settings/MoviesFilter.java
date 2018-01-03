@@ -23,7 +23,7 @@ public class MoviesFilter {
     private boolean loadMore;
 
     public MoviesFilter(RxSharedPreferences preferences) {
-        page = preferences.getInteger(PAGE, 0);
+        page = preferences.getInteger(PAGE, 1);
     }
 
     public int getPage() {

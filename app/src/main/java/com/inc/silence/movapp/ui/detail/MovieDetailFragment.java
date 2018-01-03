@@ -2,7 +2,6 @@ package com.inc.silence.movapp.ui.detail;
 
 import android.os.Bundle;
 
-import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.di.components.AppComponent;
 import com.inc.silence.movapp.domain.entity.main.MovieDetail;
