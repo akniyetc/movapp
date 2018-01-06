@@ -1,4 +1,4 @@
-package com.inc.silence.movapp.presentation.movies.movieDetail;
+package com.inc.silence.movapp.presentation.movies.detail;
 
 import com.inc.silence.movapp.data.settings.MoviesFilter;
 import com.inc.silence.movapp.domain.entity.main.MovieDetail;

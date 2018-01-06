@@ -22,14 +22,14 @@ public class Movie extends RealmObject {
 
     @SerializedName(ORIGINAL_NAME)
     private String original_name;
-    @SerializedName(GENRE_IDS)
-    private RealmList<Genre_ids> genre_ids;
+//    @SerializedName(GENRE_IDS)
+//    private RealmList<Genre_ids> genre_ids;
     @SerializedName(NAME)
     private String name;
     @SerializedName(POPULARITY)
     private float popularity;
-    @SerializedName(ORIGIN_COUNTRY)
-    private RealmList<OrigincountryList> origin_country;
+//    @SerializedName(ORIGIN_COUNTRY)
+//    private RealmList<OrigincountryList> origin_country;
     @SerializedName(VOTE_COUNT)
     private int vote_count;
     @SerializedName(FIRST_AIR_DATE)
@@ -59,13 +59,13 @@ public class Movie extends RealmObject {
     public String getOriginal_name(){
         return this.original_name;
     }
-    public Movie setGenre_ids(RealmList<Genre_ids> genre_ids){
-        this.genre_ids = genre_ids;
-        return this;
-    }
-    public RealmList<Genre_ids> getGenre_ids(){
-        return this.genre_ids;
-    }
+//    public Movie setGenre_ids(RealmList<Genre_ids> genre_ids){
+//        this.genre_ids = genre_ids;
+//        return this;
+//    }
+//    public RealmList<Genre_ids> getGenre_ids(){
+//        return this.genre_ids;
+//    }
     public Movie setName(String name){
         this.name = name;
         return this;
@@ -80,13 +80,13 @@ public class Movie extends RealmObject {
     public float getPopularity(){
         return this.popularity;
     }
-    public Movie setOrigin_country(RealmList<OrigincountryList> origin_country){
-        this.origin_country = origin_country;
-        return this;
-    }
-    public RealmList<OrigincountryList> getOrigin_country(){
-        return this.origin_country;
-    }
+//    public Movie setOrigin_country(RealmList<OrigincountryList> origin_country){
+//        this.origin_country = origin_country;
+//        return this;
+//    }
+//    public RealmList<OrigincountryList> getOrigin_country(){
+//        return this.origin_country;
+//    }
     public Movie setVote_count(int vote_count){
         this.vote_count = vote_count;
         return this;

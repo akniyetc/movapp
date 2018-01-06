@@ -6,7 +6,7 @@ import io.realm.RealmObject;
 public class Genre_ids extends RealmObject {
     public static final String VALUE = "value";
 
-    @SerializedName(VALUE)
+    @SerializedName("")
     private int value;
 
     public Genre_ids(){ }

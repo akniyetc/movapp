@@ -9,8 +9,7 @@ import com.inc.silence.movapp.R;
 import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.domain.entity.movies.Movie;
 import com.inc.silence.movapp.ui.base.BaseViewHolder;
-
-import javax.inject.Inject;
+import com.inc.silence.movapp.utils.Constants;
 
 import butterknife.BindView;
 
@@ -28,8 +27,8 @@ public class MoviesListViewHolder extends BaseViewHolder {
         App.getAppComponent().inject(this);
     }
 
-    public void bind(Movie movie, MoviesActivity.OnItemSelectedListener onItemSelectedListener) {
-        Glide.with(itemView.getContext()).load(movie.getPoster_path()).into(movieImageView);
+    public void bind(Movie movie, Context context, MoviesActivity.OnItemSelectedListener onItemSelectedListener) {
+        Glide.with(context).load(Constants.ImgUrl + movie.getPoster_path()).into(movieImageView);
         movieImageView.setOnClickListener(view -> onItemSelectedListener.onItemSelected(movie.getId()));
     }
 }

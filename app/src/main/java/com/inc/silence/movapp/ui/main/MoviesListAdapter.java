@@ -36,7 +36,7 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListViewHolder
 
     @Override
     public void onBindViewHolder(MoviesListViewHolder holder, int position) {
-        holder.bind(mMovieList.get(position), mOnItemSelectedListener);
+        holder.bind(mMovieList.get(position), mContext, mOnItemSelectedListener);
     }
 
     @Override
@@ -48,6 +48,7 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListViewHolder
     }
 
     public void setMovieList(List<Movie> movieList) {
-        mMovieList = movieList;
+        this.mMovieList = movieList;
+        this.notifyDataSetChanged();
     }
 }

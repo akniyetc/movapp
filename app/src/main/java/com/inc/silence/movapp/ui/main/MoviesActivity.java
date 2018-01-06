@@ -3,6 +3,7 @@ package com.inc.silence.movapp.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 
 import com.inc.silence.movapp.R;
@@ -16,12 +17,17 @@ import com.inc.silence.movapp.utils.CommonUtils;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+
 public class MoviesActivity extends BaseActivity {
 
     public static final String MOVIE_ID = "movie_id";
 
     @Inject
     CommonUtils mCommonUtils;
+
+    @BindView(R.id.bottom_navigation)
+    BottomNavigationView mBottomNavigationView;
 
     private String movieID;
 
@@ -45,7 +51,18 @@ public class MoviesActivity extends BaseActivity {
                 removeFragment(getMovieDetailFragment());
             }
         }
+        chooseFragmentFromBottomNavigation();
 
+        showPopular();
+        if (savedInstanceState != null && savedInstanceState.get(MOVIE_ID) != null) {
+            movieID = savedInstanceState.getString(MOVIE_ID);
+        }
+        if (mCommonUtils.isLarge()) {
+            changeDetailsFragment();
+        }
+    }
+
+    private void showPopular() {
         PopularMoviesFragment popularMoviesFragment = getPopularMoviesFragment();
         popularMoviesFragment.setOnItemSelectedListener(id -> {
             movieID = id;
@@ -56,12 +73,33 @@ public class MoviesActivity extends BaseActivity {
             }
         });
         changeFragment(popularMoviesFragment, R.id.container);
-        if (savedInstanceState != null && savedInstanceState.get(MOVIE_ID) != null) {
-            movieID = savedInstanceState.getString(MOVIE_ID);
-        }
-        if (mCommonUtils.isLarge()) {
-            changeDetailsFragment();
-        }
+    }
+
+    private void showTopRated() {
+        TopRatedMoviesFragment topRatedMoviesFragment = getTopRatedMoviesFragment();
+        topRatedMoviesFragment.setOnItemSelectedListener(id -> {
+            movieID = id;
+            if (mCommonUtils.isLarge()) {
+                changeDetailsFragment();
+            } else {
+                MovieDetailActivity.startActivity(MoviesActivity.this, id);
+            }
+        });
+        changeFragment(topRatedMoviesFragment, R.id.container);
+    }
+
+    private void chooseFragmentFromBottomNavigation() {
+        mBottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_popular:
+                    showPopular();
+                    return true;
+                case R.id.action_top_rated:
+                    showTopRated();
+                    return true;
+            }
+            return true;
+        });
     }
 
     private PopularMoviesFragment getPopularMoviesFragment() {
@@ -75,7 +113,7 @@ public class MoviesActivity extends BaseActivity {
     private TopRatedMoviesFragment getTopRatedMoviesFragment() {
         TopRatedMoviesFragment topRatedMoviesFragment = (TopRatedMoviesFragment) getCurrentFragment(R.id.container);
         if (topRatedMoviesFragment == null) {
-            TopRatedMoviesFragment.newInstance();
+            topRatedMoviesFragment = TopRatedMoviesFragment.newInstance();
         }
         return topRatedMoviesFragment;
     }

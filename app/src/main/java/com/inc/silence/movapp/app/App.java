@@ -1,7 +1,6 @@
 package com.inc.silence.movapp.app;
 
 import android.app.Application;
-import android.os.Build;
 
 import com.inc.silence.movapp.BuildConfig;
 import com.inc.silence.movapp.di.components.AppComponent;

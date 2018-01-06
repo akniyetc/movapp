@@ -1,4 +1,4 @@
-package com.inc.silence.movapp.presentation.movies.popularMovies;
+package com.inc.silence.movapp.presentation.movies.popular;
 
 
 import com.inc.silence.movapp.domain.entity.movies.Movie;

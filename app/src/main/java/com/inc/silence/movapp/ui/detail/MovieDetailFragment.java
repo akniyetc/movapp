@@ -5,8 +5,8 @@ import android.os.Bundle;
 import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.di.components.AppComponent;
 import com.inc.silence.movapp.domain.entity.main.MovieDetail;
-import com.inc.silence.movapp.presentation.movies.movieDetail.DetailMoviePresenter;
-import com.inc.silence.movapp.presentation.movies.movieDetail.DetailMovieView;
+import com.inc.silence.movapp.presentation.movies.detail.DetailMoviePresenter;
+import com.inc.silence.movapp.presentation.movies.detail.DetailMovieView;
 import com.inc.silence.movapp.ui.base.BaseFragment;
 
 import javax.inject.Inject;
