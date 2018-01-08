@@ -103,19 +103,11 @@ public class MoviesActivity extends BaseActivity {
     }
 
     private PopularMoviesFragment getPopularMoviesFragment() {
-        PopularMoviesFragment popularMoviesFragment = (PopularMoviesFragment) getCurrentFragment(R.id.container);
-        if (popularMoviesFragment == null) {
-            popularMoviesFragment = PopularMoviesFragment.newInstance();
-        }
-        return popularMoviesFragment;
+            return PopularMoviesFragment.newInstance();
     }
 
     private TopRatedMoviesFragment getTopRatedMoviesFragment() {
-        TopRatedMoviesFragment topRatedMoviesFragment = (TopRatedMoviesFragment) getCurrentFragment(R.id.container);
-        if (topRatedMoviesFragment == null) {
-            topRatedMoviesFragment = TopRatedMoviesFragment.newInstance();
-        }
-        return topRatedMoviesFragment;
+            return TopRatedMoviesFragment.newInstance();
     }
 
     private MovieDetailFragment getMovieDetailFragment() {

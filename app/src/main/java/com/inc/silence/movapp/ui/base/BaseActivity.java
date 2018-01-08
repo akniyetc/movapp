@@ -66,6 +66,20 @@ public class BaseActivity extends AppCompatActivity {
                 .commitNow();
     }
 
+    public void hideFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .hide(fragment)
+                .commitNow();
+    }
+
+    public void showFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .show(fragment)
+                .commitNow();
+    }
+
     public void removeFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
