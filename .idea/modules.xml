@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MovApp.iml" filepath="$PROJECT_DIR$/.idea/MovApp.iml" />
+      <module fileurl="file://E:\projects\movapp\.idea\MovApp.iml" filepath="E:\projects\movapp\.idea\MovApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\projects\movapp\app\app.iml" filepath="E:\projects\movapp\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movapp.iml" filepath="$PROJECT_DIR$/movapp.iml" />
     </modules>
   </component>
 </project>
