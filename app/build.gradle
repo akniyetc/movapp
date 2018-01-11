@@ -77,7 +77,6 @@ dependencies {
     implementation 'com.arello-mobile:moxy-app-compat:1.5.3'
     annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
 
-    compile files("${System.properties['java.home']}/../lib/tools.jar")
 }
 
 apply plugin: 'com.google.gms.google-services'
