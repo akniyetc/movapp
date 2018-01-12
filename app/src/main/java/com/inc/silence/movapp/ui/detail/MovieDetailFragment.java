@@ -3,11 +3,13 @@ package com.inc.silence.movapp.ui.detail;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.inc.silence.movapp.R;
@@ -29,6 +31,12 @@ import butterknife.BindView;
 
 public class MovieDetailFragment extends BaseFragment implements DetailMovieView {
 
+    @BindView(R.id.container)
+    View mContainer;
+
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+
     @BindView(R.id.swipeRefreshDetail)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -47,7 +55,7 @@ public class MovieDetailFragment extends BaseFragment implements DetailMovieView
     @Inject
     DetailMoviePresenter mDetailMoviePresenter;
 
-    private Movie mMovie;
+    private MovieDetail mMovie;
     private View mView;
     private String mMovieID;
 
@@ -74,8 +82,8 @@ public class MovieDetailFragment extends BaseFragment implements DetailMovieView
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detail, container, false);
-        return view;
+        mView = inflater.inflate(R.layout.fragment_detail, container, false);
+        return mView;
     }
 
     public void loadData(String id) {
@@ -84,22 +92,39 @@ public class MovieDetailFragment extends BaseFragment implements DetailMovieView
     }
 
     @Override
-    public void showLoadingProgress() {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mDetailMoviePresenter.attachView(this);
+        mDetailMoviePresenter.getMovieDetail(mMovieID);
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mDetailMoviePresenter.detachView();
+    }
+
+    @Override
+    public void showLoadingProgress() {
+        mContainer.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoadingProgress() {
-
+        mContainer.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showErrorMessage(String error) {
-
+        Snackbar.make(mView, error, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.try_again_snack_bar, v -> mDetailMoviePresenter.getMovieDetail(mMovieID))
+                .show();
     }
 
     @Override
     public void getDetailMovieDone(MovieDetail movieDetail) {
-
+        mMovie = movieDetail;
     }
 }
