@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inc.silence.movapp.R;
 import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.di.components.AppComponent;
@@ -20,6 +22,7 @@ import com.inc.silence.movapp.domain.entity.movies.Movie;
 import com.inc.silence.movapp.presentation.movies.detail.DetailMoviePresenter;
 import com.inc.silence.movapp.presentation.movies.detail.DetailMovieView;
 import com.inc.silence.movapp.ui.base.BaseFragment;
+import com.inc.silence.movapp.utils.Constants;
 
 import javax.inject.Inject;
 
@@ -36,9 +39,6 @@ public class MovieDetailFragment extends BaseFragment implements DetailMovieView
 
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
-
-    @BindView(R.id.swipeRefreshDetail)
-    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @BindView(R.id.show_image)
     ImageView mMoviePoster;
@@ -126,5 +126,23 @@ public class MovieDetailFragment extends BaseFragment implements DetailMovieView
     @Override
     public void getDetailMovieDone(MovieDetail movieDetail) {
         mMovie = movieDetail;
+        fillView();
+    }
+
+    private void fillView() {
+        if (mMovie == null) {
+            return;
+        }
+
+        Glide.with(getContext())
+                .load(Constants.ImgUrl + mMovie.getPoster_path())
+                .into(mMoviePoster);
+        mMovieName.setText(mMovie.getName());
+        mMovieRating.setText(String.valueOf(mMovie.getVote_count()));
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            mMovieDescription.setText(Html.fromHtml(mMovie.getOverview(), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            mMovieDescription.setText(Html.fromHtml(mMovie.getOverview()));
+        }
     }
 }

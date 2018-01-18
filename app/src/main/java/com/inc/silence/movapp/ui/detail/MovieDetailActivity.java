@@ -36,7 +36,7 @@ public class MovieDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         App.getAppComponent().inject(this);
         String id = getIntent().getStringExtra(EXTRA_ID);
-        setCustomContentView(R.layout.activity_base);
+        setCustomContentView(R.layout.activity_detail);
         initToolbar(mToolbar);
         setTitle(getString(R.string.detailing));
         setBackEnabled();

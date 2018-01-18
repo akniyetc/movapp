@@ -46,8 +46,8 @@ public class MovieDetail extends RealmObject {
     private String backdrop_path;
     @SerializedName(CREATED_BY)
     private RealmList<Created_by> created_by;
-    @SerializedName(EPISODE_RUN_TIME)
-    private RealmList<Episode_run_time> episode_run_time;
+//    @SerializedName(EPISODE_RUN_TIME)
+//    private RealmList<Episode_run_time> episode_run_time;
     @SerializedName(FIRST_AIR_DATE)
     private String first_air_date;
     @SerializedName(GENRES)
@@ -61,8 +61,6 @@ public class MovieDetail extends RealmObject {
 
     @SerializedName(IN_PRODUCTION)
     private boolean in_production;
-    @SerializedName(LANGUAGES)
-    private RealmList<Languages> languages;
     @SerializedName(LAST_AIR_DATE)
     private String last_air_date;
     @SerializedName(NAME)
@@ -73,8 +71,6 @@ public class MovieDetail extends RealmObject {
     private int number_of_episodes;
     @SerializedName(NUMBER_OF_SEASONS)
     private int number_of_seasons;
-    @SerializedName(ORIGIN_COUNTRY)
-    private RealmList<Origin_country> origin_country;
     @SerializedName(ORIGINAL_LANGUAGE)
     private String original_language;
     @SerializedName(ORIGINAL_NAME)
@@ -114,13 +110,6 @@ public class MovieDetail extends RealmObject {
     public RealmList<Created_by> getCreated_by(){
         return this.created_by;
     }
-    public MovieDetail setEpisode_run_time(RealmList<Episode_run_time> episode_run_time){
-        this.episode_run_time = episode_run_time;
-        return this;
-    }
-    public RealmList<Episode_run_time> getEpisode_run_time(){
-        return this.episode_run_time;
-    }
     public MovieDetail setFirst_air_date(String first_air_date){
         this.first_air_date = first_air_date;
         return this;
@@ -156,13 +145,6 @@ public class MovieDetail extends RealmObject {
     public boolean getIn_production(){
         return this.in_production;
     }
-    public MovieDetail setLanguages(RealmList<Languages> languages){
-        this.languages = languages;
-        return this;
-    }
-    public RealmList<Languages> getLanguages(){
-        return this.languages;
-    }
     public MovieDetail setLast_air_date(String last_air_date){
         this.last_air_date = last_air_date;
         return this;
@@ -197,13 +179,6 @@ public class MovieDetail extends RealmObject {
     }
     public int getNumber_of_seasons(){
         return this.number_of_seasons;
-    }
-    public MovieDetail setOrigin_country(RealmList<Origin_country> origin_country){
-        this.origin_country = origin_country;
-        return this;
-    }
-    public RealmList<Origin_country> getOrigin_country(){
-        return this.origin_country;
     }
     public MovieDetail setOriginal_language(String original_language){
         this.original_language = original_language;
