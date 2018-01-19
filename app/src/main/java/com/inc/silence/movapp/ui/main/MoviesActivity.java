@@ -115,6 +115,9 @@ public class MoviesActivity extends BaseActivity {
     }
 
     private void changeDetailsFragment() {
+        if (movieID == null) {
+            return;
+        }
         MovieDetailFragment movieDetailFragment = getMovieDetailFragment();
         if (movieDetailFragment == null) {
             movieDetailFragment = MovieDetailFragment.newInstance(movieID);

@@ -7,8 +7,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#303030">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/container"
@@ -24,10 +23,9 @@
                 <ImageView
                     android:id="@+id/show_image"
                     android:layout_width="160dp"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     android:padding="5dp"
-                    android:scaleType="fitXY"
-                    android:transitionName="@string/transition" />
+                    android:scaleType="fitXY" />
 
                 <com.devspark.robototextview.widget.RobotoTextView
                     android:id="@+id/show_name"

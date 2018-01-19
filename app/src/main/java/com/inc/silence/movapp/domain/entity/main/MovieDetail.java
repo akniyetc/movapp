@@ -46,8 +46,6 @@ public class MovieDetail extends RealmObject {
     private String backdrop_path;
     @SerializedName(CREATED_BY)
     private RealmList<Created_by> created_by;
-//    @SerializedName(EPISODE_RUN_TIME)
-//    private RealmList<Episode_run_time> episode_run_time;
     @SerializedName(FIRST_AIR_DATE)
     private String first_air_date;
     @SerializedName(GENRES)
@@ -57,7 +55,7 @@ public class MovieDetail extends RealmObject {
 
     @PrimaryKey
     @SerializedName(ID)
-    private int id;
+    private String id;
 
     @SerializedName(IN_PRODUCTION)
     private boolean in_production;
@@ -131,11 +129,11 @@ public class MovieDetail extends RealmObject {
     public String getHomepage(){
         return this.homepage;
     }
-    public MovieDetail setId(int id){
+    public MovieDetail setId(String id){
         this.id = id;
         return this;
     }
-    public int getId(){
+    public String getId(){
         return this.id;
     }
     public MovieDetail setIn_production(boolean in_production){

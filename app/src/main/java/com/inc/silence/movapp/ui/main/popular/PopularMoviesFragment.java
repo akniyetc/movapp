@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -157,6 +158,7 @@ public class PopularMoviesFragment extends BaseFragment implements PopularMovies
         mRecyclerViewListener = new RecyclerViewListener(gridLayoutManager);
         mRecyclerViewListener.setOnLoadMoreListener(() -> mPopularMoviesPresenter.loadMore());
 
+        mRefreshLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent, R.color.colorPrimaryDark);
         mAdapter = new MoviesListAdapter(mOnItemSelectedListener, getContext());
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setAdapter(mAdapter);

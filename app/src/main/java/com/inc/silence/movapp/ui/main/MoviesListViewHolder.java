@@ -3,6 +3,7 @@ package com.inc.silence.movapp.ui.main;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.inc.silence.movapp.R;
@@ -29,6 +30,6 @@ public class MoviesListViewHolder extends BaseViewHolder {
 
     public void bind(Movie movie, Context context, MoviesActivity.OnItemSelectedListener onItemSelectedListener) {
         Glide.with(context).load(Constants.ImgUrl + movie.getPoster_path()).into(movieImageView);
-        movieImageView.setOnClickListener(view -> onItemSelectedListener.onItemSelected(movie.getId()));
+        itemView.setOnClickListener(view -> onItemSelectedListener.onItemSelected(movie.getId()));
     }
 }
