@@ -17,7 +17,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 
 public class MoviesActivity extends BaseActivity {
-
+    
+    public static final String POPULAR = "popular";
+    public static final String TOPRATED = "toprated";
     public static final String MOVIE_ID = "movie_id";
 
     @Inject
@@ -49,8 +51,8 @@ public class MoviesActivity extends BaseActivity {
             }
         }
         chooseFragmentFromBottomNavigation();
-
-        showPopular();
+    
+        showMovieFragment(POPULAR);
         if (savedInstanceState != null && savedInstanceState.get(MOVIE_ID) != null) {
             movieID = savedInstanceState.getString(MOVIE_ID);
         }
@@ -60,14 +62,14 @@ public class MoviesActivity extends BaseActivity {
     }
 
 
-    private void showPopular() {
-        MoviesListFragment moviesListFragment = getPopularMoviesFragment();
+    private void showMovieFragment(String type) {
+        MoviesListFragment moviesListFragment = getMoviesFragment(type);
         moviesListFragment.setOnItemSelectedListener(id -> {
             movieID = id;
             if (mCommonUtils.isLarge()) {
                 changeDetailsFragment();
             } else {
-
+            
             }
         });
         changeFragment(moviesListFragment, R.id.container);
@@ -78,18 +80,18 @@ public class MoviesActivity extends BaseActivity {
         mBottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.action_popular:
-                    showPopular();
+                    showMovieFragment(POPULAR);
                     return true;
                 case R.id.action_top_rated:
-
+                    showMovieFragment(TOPRATED);
                     return true;
             }
             return true;
         });
     }
 
-    private MoviesListFragment getPopularMoviesFragment() {
-            return MoviesListFragment.newInstance();
+    private MoviesListFragment getMoviesFragment(final String type) {
+        return MoviesListFragment.newInstance(type);
     }
 
     private MovieDetailFragment getMovieDetailFragment() {

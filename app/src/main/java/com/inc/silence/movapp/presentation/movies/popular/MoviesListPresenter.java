@@ -13,4 +13,7 @@ public abstract class MoviesListPresenter extends BasePresenter<MoviesListView> 
     public abstract void getTopRatedMovies(boolean cached);
 
     public abstract void loadMore();
+    
+    public abstract void setType(final String type);
+    
 }

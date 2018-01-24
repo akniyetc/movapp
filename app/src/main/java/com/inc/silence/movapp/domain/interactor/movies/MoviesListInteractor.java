@@ -1,9 +1,11 @@
 package com.inc.silence.movapp.domain.interactor.movies;
 
 import com.inc.silence.movapp.data.settings.MoviesFilter;
-import com.inc.silence.movapp.domain.entity.main.Movies;
+import com.inc.silence.movapp.domain.entity.movies.Movie;
 import com.inc.silence.movapp.domain.interactor.base.Interactor;
 import com.inc.silence.movapp.domain.repository.movies.MoviesRepository;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -13,7 +15,7 @@ import io.reactivex.Observable;
  * Created by silence on 15.12.2017.
  */
 
-public class MoviesListInteractor extends Interactor<Movies, MoviesListInteractor.Params> {
+public class MoviesListInteractor extends Interactor<List<Movie>, MoviesListInteractor.Params> {
 
     private MoviesRepository mMoviesRepository;
 
@@ -23,8 +25,8 @@ public class MoviesListInteractor extends Interactor<Movies, MoviesListInteracto
     }
 
     @Override
-    protected Observable<Movies> createObservableInteractor(Params params) {
-        return mMoviesRepository.getPopular(params.mMoviesFilter, params.popularMoviesID);
+    protected Observable<List<Movie>> createObservableInteractor(Params params) {
+        return mMoviesRepository.getMoviesList(params.mMoviesFilter, params.popularMoviesID);
     }
 
 

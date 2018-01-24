@@ -3,6 +3,9 @@ package com.inc.silence.movapp.domain.repository.movies;
 import com.inc.silence.movapp.data.settings.MoviesFilter;
 import com.inc.silence.movapp.domain.entity.main.MovieDetail;
 import com.inc.silence.movapp.domain.entity.main.Movies;
+import com.inc.silence.movapp.domain.entity.movies.Movie;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -12,7 +15,7 @@ import io.reactivex.Observable;
 
 public interface MoviesRepository {
 
-    Observable<Movies> getPopular(MoviesFilter moviesFilter, String id);
-    Observable<Movies> getTopRated(MoviesFilter moviesFilter, String id);
+    Observable<List<Movie>> getMoviesList(MoviesFilter moviesFilter, String id);
+    
     Observable<MovieDetail> getMovieDetail(String id, MoviesFilter moviesFilter);
 }

@@ -23,12 +23,6 @@ public class ActivityModule {
 
     @ApplicationScope
     @Provides
-    TopRatedMoviesPresenter provideTopRatedMoviesPresenter(TopRatedMoviesPresenterImpl topRatedMoviesPresenter) {
-        return topRatedMoviesPresenter;
-    }
-
-    @ApplicationScope
-    @Provides
     DetailMoviePresenter provideDetailMoviePresenter(DetailMoviePresenterImpl detailMoviePresenter) {
         return detailMoviePresenter;
     }

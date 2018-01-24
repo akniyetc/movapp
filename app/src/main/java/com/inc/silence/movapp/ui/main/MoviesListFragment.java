@@ -35,6 +35,7 @@ import butterknife.BindView;
 
 public class MoviesListFragment extends BaseFragment implements MoviesListView {
 
+    public static final String EXTRA_KEY_TYPE = "type";
     private final String KEY_RECYCLER_STATE_POPULAR = "recycler_state_popular";
 
     @BindView(R.id.mainLayout)
@@ -60,14 +61,19 @@ public class MoviesListFragment extends BaseFragment implements MoviesListView {
     private MoviesActivity.OnItemSelectedListener mOnItemSelectedListener;
     private MoviesListAdapter mAdapter;
     private Parcelable mRecyclerViewState;
+    private String mType;
 
     @Override
     public void setupComponent(AppComponent appComponent) {
         App.getAppComponent().inject(this);
     }
 
-    public static MoviesListFragment newInstance() {
-        return new MoviesListFragment();
+    public static MoviesListFragment newInstance(final String type) {
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_KEY_TYPE, type);
+        MoviesListFragment moviesListFragment = new MoviesListFragment();
+        moviesListFragment.setArguments(bundle);
+        return moviesListFragment;
     }
 
     @Override
@@ -76,6 +82,7 @@ public class MoviesListFragment extends BaseFragment implements MoviesListView {
         if (savedInstanceState != null) {
             mRecyclerViewState = savedInstanceState.getParcelable(KEY_RECYCLER_STATE_POPULAR);
         }
+        mType = getArguments().getString(EXTRA_KEY_TYPE);
     }
 
     @Nullable
@@ -95,6 +102,7 @@ public class MoviesListFragment extends BaseFragment implements MoviesListView {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mPopularMoviesPresenter.attachView(this);
+        mPopularMoviesPresenter.setType(mType);
         mPopularMoviesPresenter.getPopularMovies(savedInstanceState != null);
     }
 

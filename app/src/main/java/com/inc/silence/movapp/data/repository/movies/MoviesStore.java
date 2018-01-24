@@ -2,7 +2,9 @@ package com.inc.silence.movapp.data.repository.movies;
 
 import com.inc.silence.movapp.domain.entity.main.MovieDetail;
 import com.inc.silence.movapp.domain.entity.main.Movies;
+import com.inc.silence.movapp.domain.entity.movies.Movie;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -12,13 +14,12 @@ import io.reactivex.Observable;
  */
 
 public interface MoviesStore {
-    Observable<Movies> getPopular(Map<String, String> queries, String id);
-
-    Observable<Movies> getTopRated(Map<String, String> queries, String id);
-
+    
+    Observable<List<Movie>> getMovies(Map<String, String> queries, String id);
+    
+    void saveMovies(List<Movie> movieList, boolean clear, String id);
+    
     Observable<MovieDetail> getDetailMovie(String movieId, Map<String, String> queries);
-
-    void savePopularMovies(Movies movies, boolean clear);
-    void saveTopRated(Movies movies, boolean clear);
+    
     void saveMovieDetail(MovieDetail movieDetail);
 }

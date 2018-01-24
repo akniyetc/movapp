@@ -15,7 +15,6 @@ public class Movie extends RealmObject {
     public static final String FIRST_AIR_DATE = "first_air_date";
     public static final String BACKDROP_PATH = "backdrop_path";
     public static final String ORIGINAL_LANGUAGE = "original_language";
-    public static final String ID = "id";
     public static final String VOTE_AVERAGE = "vote_average";
     public static final String OVERVIEW = "overview";
     public static final String POSTER_PATH = "poster_path";
@@ -34,17 +33,15 @@ public class Movie extends RealmObject {
     private String backdrop_path;
     @SerializedName(ORIGINAL_LANGUAGE)
     private String original_language;
-
-    @PrimaryKey
-    @SerializedName(ID)
-    private String id;
-
     @SerializedName(VOTE_AVERAGE)
     private float vote_average;
     @SerializedName(OVERVIEW)
     private String overview;
     @SerializedName(POSTER_PATH)
     private String poster_path;
+    
+    // local field
+    private String id;
 
     public Movie(){ }
 

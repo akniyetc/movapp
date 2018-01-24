@@ -24,8 +24,8 @@ public class MoviesListPresenterImpl extends MoviesListPresenter {
     private MoviesFilter mMoviesFilter;
     private List<Movie> mMoviesList;
     private int mAllItemsCount;
-    private String moviesId;
     private Navigator mNavigator;
+    private String mType;
 
     @Inject
     public MoviesListPresenterImpl(MoviesListInteractor popularMoviesInteractor, MoviesFilter moviesFilter, Navigator navigator) {
@@ -47,13 +47,7 @@ public class MoviesListPresenterImpl extends MoviesListPresenter {
     public void getTopRatedMovies(boolean cached) {
 
     }
-
-    private void getTopRatedMoviesList() {
-        getView().showLoadingProgress();
-        mPopularMoviesInteractor.execute(new PopularMoviesListObserver(),
-                MoviesListInteractor.Params.create(mMoviesFilter, moviesId));
-    }
-
+    
     @Override
     public void loadMore() {
         if (mAllItemsCount > mMoviesList.size()) {
@@ -62,11 +56,16 @@ public class MoviesListPresenterImpl extends MoviesListPresenter {
             getPopularMoviesList();
         }
     }
-
+    
+    @Override
+    public void setType(final String type) {
+        mType = type;
+    }
+    
     private void getPopularMoviesList() {
         getView().showLoadingProgress();
         mPopularMoviesInteractor.execute(new PopularMoviesListObserver(),
-                MoviesListInteractor.Params.create(mMoviesFilter, moviesId));
+                MoviesListInteractor.Params.create(mMoviesFilter, mType));
     }
 
     public void showErrorMessage(Throwable throwable) {
@@ -87,19 +86,21 @@ public class MoviesListPresenterImpl extends MoviesListPresenter {
 
     }
 
-    private final class PopularMoviesListObserver extends InteractorObserver<Movies> {
+    private final class PopularMoviesListObserver extends InteractorObserver<List<Movie>> {
 
         @Override
-        public void onNext(Movies movies) {
+        public void onNext(List<Movie> movies) {
             super.onNext(movies);
-            if (mMoviesFilter.isLoadMore()) {
-                mMoviesList.addAll(movies.getResults());
-            } else {
-                mMoviesList = movies.getResults();
-            }
-            moviesId = movies.getId();
-            mAllItemsCount = movies.getTotal_pages();
-            getView().setSubtitle(String.format(getView().getContext().getString(R.string.movies_count), movies.getTotal_results()));
+//            if (mMoviesFilter.isLoadMore()) {
+//                mMoviesList.addAll(movies.getResults());
+//            } else {
+//                mMoviesList = movies.getResults();
+//            }
+//            mAllItemsCount = movies.getTotal_pages();
+            
+            mMoviesList = movies;
+            
+            getView().setSubtitle(String.format(getView().getContext().getString(R.string.movies_count), 55));
             getView().getPopularMoviesDone(mMoviesList);
             getView().hideLoadingProgress();
         }

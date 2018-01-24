@@ -3,7 +3,9 @@ package com.inc.silence.movapp.data.repository.movies;
 import com.inc.silence.movapp.data.exception.NetworkConnectionException;
 import com.inc.silence.movapp.domain.entity.main.MovieDetail;
 import com.inc.silence.movapp.domain.entity.main.Movies;
+import com.inc.silence.movapp.domain.entity.movies.Movie;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -22,45 +24,28 @@ public class MoviesLocalStorage implements MoviesStore {
     MoviesLocalStorage() {
 
     }
-
-
+    
     @Override
-    public Observable<Movies> getTopRated(Map<String, String> queries, String id) {
+    public Observable<List<Movie>> getMovies(Map<String, String> queries, String id) {
         Realm realm = Realm.getDefaultInstance();
-        if (ifMoviesIsExists(realm)) {
-            Movies movies = realm.copyFromRealm(realm.where(Movies.class).equalTo("id", id).findFirst());
+        if (ifMoviesIsExists(realm, id)) {
+            List<Movie> movieList = realm.copyFromRealm(realm.where(Movie.class).equalTo("id", id).findAll());
             realm.close();
-            return Observable.just(movies);
+            return Observable.just(movieList);
         }
         realm.close();
         return Observable.error(new NetworkConnectionException());
     }
+    
 
     @Override
-    public Observable<Movies> getPopular(Map<String, String> queries, String id) {
-        Realm realm = Realm.getDefaultInstance();
-        if (ifMoviesIsExists(realm)) {
-            Movies movies = realm.copyFromRealm(realm.where(Movies.class).equalTo("id", id).findFirst());
-            realm.close();
-            return Observable.just(movies);
+    public void saveMovies(List<Movie> movieList, boolean clear, String id) {
+        for (Movie movie : movieList) {
+            movie.setId(id);
         }
-        realm.close();
-        return Observable.error(new NetworkConnectionException());
-    }
-
-    @Override
-    public void savePopularMovies(Movies movies, boolean clear) {
         Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(realm1 -> {
-            if (clear) {
-                realm1.delete(Movies.class);
-                realm1.insertOrUpdate(movies);
-            } else {
-                Movies realmMovies = realm1.copyFromRealm(realm1.where(Movies.class).findFirst());
-                realmMovies.getResults().addAll(movies.getResults());
-                realm1.delete(Movies.class);
-                realm1.insertOrUpdate(realmMovies);
-            }
+            realm1.insertOrUpdate(movieList);
         });
         realm.close();
     }
@@ -77,25 +62,6 @@ public class MoviesLocalStorage implements MoviesStore {
         return Observable.error(new NetworkConnectionException());
     }
 
-
-
-    @Override
-    public void saveTopRated(Movies movies, boolean clear) {
-        Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(realm1 -> {
-            if (clear) {
-                realm1.delete(Movies.class);
-                realm1.insertOrUpdate(movies);
-            } else {
-                Movies realmMovies = realm1.copyFromRealm(realm1.where(Movies.class).findFirst());
-                realmMovies.getResults().addAll(movies.getResults());
-                realm1.delete(Movies.class);
-                realm1.insertOrUpdate(realmMovies);
-            }
-        });
-        realm.close();
-    }
-
     @Override
     public void saveMovieDetail(MovieDetail movieDetail) {
         Realm realm = Realm.getDefaultInstance();
@@ -103,8 +69,8 @@ public class MoviesLocalStorage implements MoviesStore {
         realm.close();
     }
 
-    private boolean ifMoviesIsExists(Realm realm) {
-        RealmQuery<Movies> query = realm.where(Movies.class);
+    private boolean ifMoviesIsExists(Realm realm, String id) {
+        RealmQuery<Movie> query = realm.where(Movie.class).equalTo("id", id);
         return query.count() != 0;
     }
 
