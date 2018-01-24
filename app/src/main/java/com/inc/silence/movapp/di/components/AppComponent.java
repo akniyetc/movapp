@@ -22,8 +22,6 @@ public interface AppComponent {
 
     void inject(MoviesListFragment moviesListFragment);
 
-    void inject(TopRatedMoviesFragment topRatedMoviesFragment);
-
     void inject(MoviesListViewHolder moviesListViewHolder);
 
     void inject(MovieDetailActivity movieDetailActivity);
