@@ -13,32 +13,33 @@ import io.reactivex.Observable;
  * Created by silence on 15.12.2017.
  */
 
-public class TopRatedMoviesInteractor extends Interactor<Movies, TopRatedMoviesInteractor.Params> {
+public class MoviesListInteractor extends Interactor<Movies, MoviesListInteractor.Params> {
 
     private MoviesRepository mMoviesRepository;
 
     @Inject
-    public TopRatedMoviesInteractor(MoviesRepository moviesRepository) {
+    public MoviesListInteractor(MoviesRepository moviesRepository) {
         mMoviesRepository = moviesRepository;
     }
 
     @Override
     protected Observable<Movies> createObservableInteractor(Params params) {
-        return mMoviesRepository.getTopRated(params.mMoviesFilter, params.topRatedMoviesID);
+        return mMoviesRepository.getPopular(params.mMoviesFilter, params.popularMoviesID);
     }
+
 
     public static final class Params {
 
         private final MoviesFilter mMoviesFilter;
-        private final String topRatedMoviesID;
+        private final String popularMoviesID;
 
         public Params(MoviesFilter moviesFilter, String id) {
-            mMoviesFilter = moviesFilter;
-            this.topRatedMoviesID = id;
+            this.mMoviesFilter = moviesFilter;
+            this.popularMoviesID = id;
         }
 
-        public static Params create(MoviesFilter moviesFilter, String topRatedMoviesID) {
-            return new Params(moviesFilter, topRatedMoviesID);
+        public static Params create(MoviesFilter moviesFilter, String id) {
+            return new Params(moviesFilter, id);
         }
     }
 }

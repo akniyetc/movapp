@@ -9,6 +9,7 @@ import com.inc.silence.movapp.data.settings.MoviesFilter;
 import com.inc.silence.movapp.di.qualifier.ApplicationContext;
 import com.inc.silence.movapp.di.qualifier.PrefFile;
 import com.inc.silence.movapp.di.scopes.ApplicationScope;
+import com.inc.silence.movapp.presentation.navigator.Navigator;
 import com.inc.silence.movapp.utils.CommonUtils;
 import com.inc.silence.movapp.utils.Constants;
 
@@ -43,5 +44,11 @@ public class DataModule {
     @ApplicationScope
     CommonUtils provideCommonUtils(Application application) {
         return new CommonUtils(application);
+    }
+
+    @Provides
+    @ApplicationScope
+    Navigator provideNavigator() {
+        return new Navigator();
     }
 }

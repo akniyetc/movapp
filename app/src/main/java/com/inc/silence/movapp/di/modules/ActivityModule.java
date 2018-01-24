@@ -3,10 +3,8 @@ package com.inc.silence.movapp.di.modules;
 import com.inc.silence.movapp.di.scopes.ApplicationScope;
 import com.inc.silence.movapp.presentation.movies.detail.DetailMoviePresenter;
 import com.inc.silence.movapp.presentation.movies.detail.DetailMoviePresenterImpl;
-import com.inc.silence.movapp.presentation.movies.popular.PopularMoviesPresenter;
-import com.inc.silence.movapp.presentation.movies.popular.PopularMoviesPresenterImpl;
-import com.inc.silence.movapp.presentation.movies.rated.TopRatedMoviesPresenter;
-import com.inc.silence.movapp.presentation.movies.rated.TopRatedMoviesPresenterImpl;
+import com.inc.silence.movapp.presentation.movies.popular.MoviesListPresenter;
+import com.inc.silence.movapp.presentation.movies.popular.MoviesListPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,7 +17,7 @@ public class ActivityModule {
 
     @ApplicationScope
     @Provides
-    PopularMoviesPresenter providePopularMoviesPresenter(PopularMoviesPresenterImpl popularMoviesPresenter) {
+    MoviesListPresenter providePopularMoviesPresenter(MoviesListPresenterImpl popularMoviesPresenter) {
         return popularMoviesPresenter;
     }
 

@@ -5,8 +5,9 @@ import com.inc.silence.movapp.data.settings.MoviesFilter;
 import com.inc.silence.movapp.domain.entity.main.Movies;
 import com.inc.silence.movapp.domain.entity.movies.Movie;
 import com.inc.silence.movapp.domain.interactor.base.InteractorObserver;
-import com.inc.silence.movapp.domain.interactor.movies.PopularMoviesInteractor;
+import com.inc.silence.movapp.domain.interactor.movies.MoviesListInteractor;
 import com.inc.silence.movapp.presentation.exception.ErrorMessageFactory;
+import com.inc.silence.movapp.presentation.navigator.Navigator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +18,20 @@ import javax.inject.Inject;
  * Created by silence on 02.01.2018.
  */
 
-public class PopularMoviesPresenterImpl extends PopularMoviesPresenter {
+public class MoviesListPresenterImpl extends MoviesListPresenter {
 
-    private PopularMoviesInteractor mPopularMoviesInteractor;
+    private MoviesListInteractor mPopularMoviesInteractor;
     private MoviesFilter mMoviesFilter;
     private List<Movie> mMoviesList;
     private int mAllItemsCount;
+    private String moviesId;
+    private Navigator mNavigator;
 
     @Inject
-    public PopularMoviesPresenterImpl(PopularMoviesInteractor popularMoviesInteractor, MoviesFilter moviesFilter) {
+    public MoviesListPresenterImpl(MoviesListInteractor popularMoviesInteractor, MoviesFilter moviesFilter, Navigator navigator) {
         mPopularMoviesInteractor = popularMoviesInteractor;
         mMoviesFilter = moviesFilter;
+        mNavigator = navigator;
         mMoviesList = new ArrayList<>();
     }
 
@@ -37,6 +41,17 @@ public class PopularMoviesPresenterImpl extends PopularMoviesPresenter {
         mMoviesFilter.setPage(1);
         mMoviesFilter.setLoadMore(false);
         getPopularMoviesList();
+    }
+
+    @Override
+    public void getTopRatedMovies(boolean cached) {
+
+    }
+
+    private void getTopRatedMoviesList() {
+        getView().showLoadingProgress();
+        mPopularMoviesInteractor.execute(new PopularMoviesListObserver(),
+                MoviesListInteractor.Params.create(mMoviesFilter, moviesId));
     }
 
     @Override
@@ -51,13 +66,14 @@ public class PopularMoviesPresenterImpl extends PopularMoviesPresenter {
     private void getPopularMoviesList() {
         getView().showLoadingProgress();
         mPopularMoviesInteractor.execute(new PopularMoviesListObserver(),
-                PopularMoviesInteractor.Params.create(mMoviesFilter, "1"));
+                MoviesListInteractor.Params.create(mMoviesFilter, moviesId));
     }
 
     public void showErrorMessage(Throwable throwable) {
         getView().hideLoadingProgress();
         getView().showErrorMessage(ErrorMessageFactory.create(getView().getContext(), throwable));
     }
+
 
     @Override
     public void detachView() {
@@ -81,8 +97,8 @@ public class PopularMoviesPresenterImpl extends PopularMoviesPresenter {
             } else {
                 mMoviesList = movies.getResults();
             }
+            moviesId = movies.getId();
             mAllItemsCount = movies.getTotal_pages();
-            //mMoviesFilter.setPage(mMoviesList.size() / movies.getPage());
             getView().setSubtitle(String.format(getView().getContext().getString(R.string.movies_count), movies.getTotal_results()));
             getView().getPopularMoviesDone(mMoviesList);
             getView().hideLoadingProgress();
@@ -93,4 +109,5 @@ public class PopularMoviesPresenterImpl extends PopularMoviesPresenter {
             showErrorMessage(e);
         }
     }
+
 }

@@ -10,9 +10,13 @@ import java.util.List;
  * Created by silence on 30.12.2017.
  */
 
-public interface PopularMoviesView extends BaseView {
+public interface MoviesListView extends BaseView {
 
     void getPopularMoviesDone(List<Movie> movies);
 
+    void getTopRatedMoviesDone(List<Movie> movies);
+
     void setSubtitle(String title);
+
+    void showDetail(String movieId);
 }

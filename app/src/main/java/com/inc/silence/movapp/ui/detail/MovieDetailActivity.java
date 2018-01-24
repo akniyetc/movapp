@@ -24,11 +24,11 @@ public class MovieDetailActivity extends BaseActivity {
     @Inject
     CommonUtils mCommonUtils;
 
-    public static void startActivity(Context context, String id) {
+    public static Intent getCallingIntent(Context context, String id) {
         Intent intent = new Intent(context, MovieDetailActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(EXTRA_ID, id);
-        context.startActivity(intent);
+        return intent;
     }
 
     @Override

@@ -7,8 +7,7 @@ import com.inc.silence.movapp.ui.detail.MovieDetailActivity;
 import com.inc.silence.movapp.ui.detail.MovieDetailFragment;
 import com.inc.silence.movapp.ui.main.MoviesActivity;
 import com.inc.silence.movapp.ui.main.MoviesListViewHolder;
-import com.inc.silence.movapp.ui.main.popular.PopularMoviesFragment;
-import com.inc.silence.movapp.ui.main.topRated.TopRatedMoviesFragment;
+import com.inc.silence.movapp.ui.main.MoviesListFragment;
 
 import dagger.Component;
 
@@ -21,7 +20,7 @@ public interface AppComponent {
 
     void inject(MoviesActivity moviesActivity);
 
-    void inject(PopularMoviesFragment popularMoviesFragment);
+    void inject(MoviesListFragment moviesListFragment);
 
     void inject(TopRatedMoviesFragment topRatedMoviesFragment);
 

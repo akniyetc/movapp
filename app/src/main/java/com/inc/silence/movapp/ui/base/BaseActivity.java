@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.inc.silence.movapp.R;
+import com.inc.silence.movapp.presentation.navigator.Navigator;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

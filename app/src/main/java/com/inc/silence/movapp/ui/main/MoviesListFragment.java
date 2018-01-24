@@ -1,4 +1,4 @@
-package com.inc.silence.movapp.ui.main.popular;
+package com.inc.silence.movapp.ui.main;
 
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +18,9 @@ import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.data.settings.MoviesFilter;
 import com.inc.silence.movapp.di.components.AppComponent;
 import com.inc.silence.movapp.domain.entity.movies.Movie;
-import com.inc.silence.movapp.presentation.movies.popular.PopularMoviesPresenter;
-import com.inc.silence.movapp.presentation.movies.popular.PopularMoviesView;
+import com.inc.silence.movapp.presentation.movies.popular.MoviesListPresenter;
+import com.inc.silence.movapp.presentation.movies.popular.MoviesListView;
 import com.inc.silence.movapp.ui.base.BaseFragment;
-import com.inc.silence.movapp.ui.main.MoviesActivity;
-import com.inc.silence.movapp.ui.main.MoviesListAdapter;
 import com.inc.silence.movapp.utils.RecyclerViewListener;
 
 import java.util.List;
@@ -36,7 +33,7 @@ import butterknife.BindView;
  * Created by silence on 01.01.2018.
  */
 
-public class PopularMoviesFragment extends BaseFragment implements PopularMoviesView {
+public class MoviesListFragment extends BaseFragment implements MoviesListView {
 
     private final String KEY_RECYCLER_STATE_POPULAR = "recycler_state_popular";
 
@@ -56,7 +53,7 @@ public class PopularMoviesFragment extends BaseFragment implements PopularMovies
     MoviesFilter mMoviesFilter;
 
     @Inject
-    PopularMoviesPresenter mPopularMoviesPresenter;
+    MoviesListPresenter mPopularMoviesPresenter;
 
     private View mView;
     private RecyclerViewListener mRecyclerViewListener;
@@ -69,8 +66,8 @@ public class PopularMoviesFragment extends BaseFragment implements PopularMovies
         App.getAppComponent().inject(this);
     }
 
-    public static PopularMoviesFragment newInstance() {
-        return new PopularMoviesFragment();
+    public static MoviesListFragment newInstance() {
+        return new MoviesListFragment();
     }
 
     @Override
@@ -137,8 +134,19 @@ public class PopularMoviesFragment extends BaseFragment implements PopularMovies
     }
 
     @Override
+    public void getTopRatedMoviesDone(List<Movie> movies) {
+        mAdapter.setMovieList(movies);
+        restoreState();
+    }
+
+    @Override
     public void setSubtitle(String text) {
         super.setSubtitle(text);
+    }
+
+    @Override
+    public void showDetail(String movieId) {
+
     }
 
     private void restoreState() {
