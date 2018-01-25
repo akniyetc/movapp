@@ -22,12 +22,15 @@ import butterknife.Unbinder;
  * Created by silence on 30.12.2017.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     protected Toolbar mToolbar;
 
     private Unbinder mUnbinder;
+
+    @Inject
+    protected Navigator mNavigator;
 
 
     protected void setCustomContentView(@LayoutRes int resId) {

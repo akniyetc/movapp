@@ -69,7 +69,7 @@ public class MoviesActivity extends BaseActivity {
             if (mCommonUtils.isLarge()) {
                 changeDetailsFragment();
             } else {
-            
+                this.mNavigator.navigateToDetail(this, movieID);
             }
         });
         changeFragment(moviesListFragment, R.id.container);

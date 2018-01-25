@@ -32,22 +32,20 @@ public class MoviesCloudStorage implements MoviesStore {
     }
     
     @Override
-    public Observable<List<Movie>> getMovies(final Map<String, String> queries, final String id) {
-        if (id.equals(MoviesActivity.POPULAR)) {
+    public Observable<Movies> getMovies(final Map<String, String> queries, final String type) {
+        if (type.equals(MoviesActivity.POPULAR)) {
             return mMainService
-                .getPopular(queries)
-                .map(Movies::getResults);
-        } else if (id.equals(MoviesActivity.TOPRATED)) {
+                .getPopular(queries);
+        } else if (type.equals(MoviesActivity.TOPRATED)) {
             return mMainService
-                .getTopRated(queries)
-                .map(Movies::getResults);
+                .getTopRated(queries);
         }
         throw new UnsupportedOperationException();
     }
     
     @Override
-    public void saveMovies(final List<Movie> movieList, final boolean clear, final String id) {
-    
+    public void saveMovies(final Movies movieList, final boolean clear, final String id) {
+        throw new UnsupportedOperationException("You can not save or remove data on cloud");
     }
     
     @Override

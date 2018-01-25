@@ -15,9 +15,9 @@ import io.reactivex.Observable;
 
 public interface MoviesStore {
     
-    Observable<List<Movie>> getMovies(Map<String, String> queries, String id);
+    Observable<Movies> getMovies(Map<String, String> queries, String type);
     
-    void saveMovies(List<Movie> movieList, boolean clear, String id);
+    void saveMovies(Movies movieList, boolean clear, String id);
     
     Observable<MovieDetail> getDetailMovie(String movieId, Map<String, String> queries);
     

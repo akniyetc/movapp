@@ -18,8 +18,8 @@ import com.inc.silence.movapp.app.App;
 import com.inc.silence.movapp.data.settings.MoviesFilter;
 import com.inc.silence.movapp.di.components.AppComponent;
 import com.inc.silence.movapp.domain.entity.movies.Movie;
-import com.inc.silence.movapp.presentation.movies.popular.MoviesListPresenter;
-import com.inc.silence.movapp.presentation.movies.popular.MoviesListView;
+import com.inc.silence.movapp.presentation.movies.movies.MoviesListPresenter;
+import com.inc.silence.movapp.presentation.movies.movies.MoviesListView;
 import com.inc.silence.movapp.ui.base.BaseFragment;
 import com.inc.silence.movapp.utils.RecyclerViewListener;
 
@@ -103,7 +103,7 @@ public class MoviesListFragment extends BaseFragment implements MoviesListView {
         super.onActivityCreated(savedInstanceState);
         mPopularMoviesPresenter.attachView(this);
         mPopularMoviesPresenter.setType(mType);
-        mPopularMoviesPresenter.getPopularMovies(savedInstanceState != null);
+        mPopularMoviesPresenter.getMovies(savedInstanceState != null);
     }
 
     @Override
@@ -142,19 +142,8 @@ public class MoviesListFragment extends BaseFragment implements MoviesListView {
     }
 
     @Override
-    public void getTopRatedMoviesDone(List<Movie> movies) {
-        mAdapter.setMovieList(movies);
-        restoreState();
-    }
-
-    @Override
     public void setSubtitle(String text) {
         super.setSubtitle(text);
-    }
-
-    @Override
-    public void showDetail(String movieId) {
-
     }
 
     private void restoreState() {
@@ -166,7 +155,7 @@ public class MoviesListFragment extends BaseFragment implements MoviesListView {
 
     private void refreshList() {
         mRecyclerViewListener.refresh();
-        mPopularMoviesPresenter.getPopularMovies(false);
+        mPopularMoviesPresenter.getMovies(false);
     }
 
     private void initViews() {

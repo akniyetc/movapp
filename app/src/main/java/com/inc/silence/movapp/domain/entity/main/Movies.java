@@ -7,7 +7,7 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class Movies {
+public class Movies extends RealmObject {
     public static final String PAGE = "page";
     public static final String ID = "id";
     public static final String TOTAL_RESULTS = "total_results";

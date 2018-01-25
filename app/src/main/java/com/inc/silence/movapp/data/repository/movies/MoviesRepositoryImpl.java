@@ -35,12 +35,12 @@ public class MoviesRepositoryImpl implements MoviesRepository {
 	}
 	
 	@Override
-	public Observable<List<Movie>> getMoviesList(MoviesFilter moviesFilter, String id) {
+	public Observable<Movies> getMoviesList(MoviesFilter moviesFilter, String type) {
 		mMoviesFilter = moviesFilter;
-		return Observable.create((ObservableOnSubscribe<List<Movie>>) e -> {
+		return Observable.create((ObservableOnSubscribe<Movies>) e -> {
 			if (mMoviesFilter.isCached()) {
 				mMoviesLocalStorage
-					.getMovies(mMoviesFilter.getQueriesMovies(), id)
+					.getMovies(mMoviesFilter.getQueriesMovies(), type)
 					.subscribe(movies -> {
 						if (!e.isDisposed()) {
 							e.onNext(movies);
@@ -52,15 +52,15 @@ public class MoviesRepositoryImpl implements MoviesRepository {
 					});
 			} else {
 				mMoviesCloudStorage
-					.getMovies(mMoviesFilter.getQueriesMovies(), id)
-					.doOnNext(movies -> mMoviesLocalStorage.saveMovies(movies, !mMoviesFilter.isLoadMore(), id))
+					.getMovies(mMoviesFilter.getQueriesMovies(), type)
+					.doOnNext(movies -> mMoviesLocalStorage.saveMovies(movies, !mMoviesFilter.isLoadMore(), type))
 					.subscribe(movies -> {
 						if (!e.isDisposed()) {
 							e.onNext(movies);
 						}
 					}, throwable -> {
 						if (!e.isDisposed()) {
-							getPopularMoviesFromLocalStore(e, throwable, id);
+							getPopularMoviesFromLocalStore(e, throwable, type);
 						}
 					});
 			}
@@ -69,7 +69,7 @@ public class MoviesRepositoryImpl implements MoviesRepository {
 			.observeOn(AndroidSchedulers.mainThread(), true);
 	}
 	
-	private void getPopularMoviesFromLocalStore(ObservableEmitter<List<Movie>> e, Throwable t, String id) {
+	private void getPopularMoviesFromLocalStore(ObservableEmitter<Movies> e, Throwable t, String id) {
 		mMoviesLocalStorage
 			.getMovies(mMoviesFilter.getQueriesMovies(), id)
 			.subscribe(movies -> {

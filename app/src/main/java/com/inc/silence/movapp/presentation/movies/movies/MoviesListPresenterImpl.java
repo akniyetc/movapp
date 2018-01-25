@@ -1,4 +1,4 @@
-package com.inc.silence.movapp.presentation.movies.popular;
+package com.inc.silence.movapp.presentation.movies.movies;
 
 import com.inc.silence.movapp.R;
 import com.inc.silence.movapp.data.settings.MoviesFilter;
@@ -24,28 +24,21 @@ public class MoviesListPresenterImpl extends MoviesListPresenter {
     private MoviesFilter mMoviesFilter;
     private List<Movie> mMoviesList;
     private int mAllItemsCount;
-    private Navigator mNavigator;
     private String mType;
 
     @Inject
-    public MoviesListPresenterImpl(MoviesListInteractor popularMoviesInteractor, MoviesFilter moviesFilter, Navigator navigator) {
+    public MoviesListPresenterImpl(MoviesListInteractor popularMoviesInteractor, MoviesFilter moviesFilter) {
         mPopularMoviesInteractor = popularMoviesInteractor;
         mMoviesFilter = moviesFilter;
-        mNavigator = navigator;
         mMoviesList = new ArrayList<>();
     }
 
     @Override
-    public void getPopularMovies(boolean cached) {
+    public void getMovies(boolean cached) {
         mMoviesFilter.setCached(cached);
         mMoviesFilter.setPage(1);
         mMoviesFilter.setLoadMore(false);
         getPopularMoviesList();
-    }
-
-    @Override
-    public void getTopRatedMovies(boolean cached) {
-
     }
     
     @Override
@@ -64,7 +57,7 @@ public class MoviesListPresenterImpl extends MoviesListPresenter {
     
     private void getPopularMoviesList() {
         getView().showLoadingProgress();
-        mPopularMoviesInteractor.execute(new PopularMoviesListObserver(),
+        mPopularMoviesInteractor.execute(new MoviesListObserver(),
                 MoviesListInteractor.Params.create(mMoviesFilter, mType));
     }
 
@@ -86,21 +79,19 @@ public class MoviesListPresenterImpl extends MoviesListPresenter {
 
     }
 
-    private final class PopularMoviesListObserver extends InteractorObserver<List<Movie>> {
+    private final class MoviesListObserver extends InteractorObserver<Movies> {
 
         @Override
-        public void onNext(List<Movie> movies) {
+        public void onNext(Movies movies) {
             super.onNext(movies);
-//            if (mMoviesFilter.isLoadMore()) {
-//                mMoviesList.addAll(movies.getResults());
-//            } else {
-//                mMoviesList = movies.getResults();
-//            }
-//            mAllItemsCount = movies.getTotal_pages();
+            if (mMoviesFilter.isLoadMore()) {
+                mMoviesList.addAll(movies.getResults());
+            } else {
+                mMoviesList = movies.getResults();
+            }
+            mAllItemsCount = movies.getTotal_pages();
             
-            mMoviesList = movies;
-            
-            getView().setSubtitle(String.format(getView().getContext().getString(R.string.movies_count), 55));
+            getView().setSubtitle(String.format(getView().getContext().getString(R.string.movies_count), movies.getTotal_results()));
             getView().getPopularMoviesDone(mMoviesList);
             getView().hideLoadingProgress();
         }

@@ -1,4 +1,4 @@
-package com.inc.silence.movapp.presentation.movies.popular;
+package com.inc.silence.movapp.presentation.movies.movies;
 
 import com.inc.silence.movapp.presentation.base.BasePresenter;
 
@@ -8,9 +8,7 @@ import com.inc.silence.movapp.presentation.base.BasePresenter;
 
 public abstract class MoviesListPresenter extends BasePresenter<MoviesListView> {
 
-    public abstract void getPopularMovies (boolean cached);
-
-    public abstract void getTopRatedMovies(boolean cached);
+    public abstract void getMovies(boolean cached);
 
     public abstract void loadMore();
     

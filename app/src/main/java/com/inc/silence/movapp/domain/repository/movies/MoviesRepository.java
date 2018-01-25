@@ -15,7 +15,7 @@ import io.reactivex.Observable;
 
 public interface MoviesRepository {
 
-    Observable<List<Movie>> getMoviesList(MoviesFilter moviesFilter, String id);
+    Observable<Movies> getMoviesList(MoviesFilter moviesFilter, String type);
     
     Observable<MovieDetail> getMovieDetail(String id, MoviesFilter moviesFilter);
 }

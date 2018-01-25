@@ -26,10 +26,10 @@ public class MoviesLocalStorage implements MoviesStore {
     }
     
     @Override
-    public Observable<List<Movie>> getMovies(Map<String, String> queries, String id) {
+    public Observable<Movies> getMovies(Map<String, String> queries, String type) {
         Realm realm = Realm.getDefaultInstance();
-        if (ifMoviesIsExists(realm, id)) {
-            List<Movie> movieList = realm.copyFromRealm(realm.where(Movie.class).equalTo("id", id).findAll());
+        if (ifMoviesIsExists(realm, type)) {
+            Movies movieList = realm.copyFromRealm(realm.where(Movies.class).equalTo("id", type).findFirst());
             realm.close();
             return Observable.just(movieList);
         }
@@ -39,14 +39,10 @@ public class MoviesLocalStorage implements MoviesStore {
     
 
     @Override
-    public void saveMovies(List<Movie> movieList, boolean clear, String id) {
-        for (Movie movie : movieList) {
-            movie.setId(id);
-        }
+    public void saveMovies(Movies movieList, boolean clear, String id) {
+        movieList.setId(id);
         Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(realm1 -> {
-            realm1.insertOrUpdate(movieList);
-        });
+        realm.executeTransaction(realm1 -> realm1.insertOrUpdate(movieList));
         realm.close();
     }
 
@@ -70,14 +66,9 @@ public class MoviesLocalStorage implements MoviesStore {
     }
 
     private boolean ifMoviesIsExists(Realm realm, String id) {
-        RealmQuery<Movie> query = realm.where(Movie.class).equalTo("id", id);
+        RealmQuery<Movies> query = realm.where(Movies.class).equalTo("id", id);
         return query.count() != 0;
     }
-
-//    private boolean ifTopRatedMoviesIsExists(Realm realm, String id) {
-//        RealmQuery<Movies> query = realm.where(Movies.class).equalTo("id", id);
-//        return query.count() != 0;
-//    }
 
     private boolean ifMovieIsExists(Realm realm, String id) {
         RealmQuery<MovieDetail> query = realm.where(MovieDetail.class).equalTo("id", id);
